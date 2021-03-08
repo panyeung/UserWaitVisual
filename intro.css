@@ -7,6 +7,10 @@ p {
   margin-bottom: 1rem;
 }
 
+.img_container {
+  display: flex;
+  justify-content: space-between;
+}
 .container {
   margin: auto;
   line-height: 2;
