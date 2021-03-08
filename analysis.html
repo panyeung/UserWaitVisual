@@ -54,6 +54,7 @@
                     
                     <br>
                     <br>
+                    <br>
                     <h3>Dynamic System Info</h3>
                     <p>
                         The data set we use is "mousewaitall.csv001",which is provided by
@@ -66,7 +67,7 @@
                         feature records. Suffix has "min", "max" and "mean". This
                         represents the way this feature computes statistics.
                     </p>
-
+                    <br>
                     <table class="table table-bordered">
                         <b>Table 2. 4 Dynamic System Info Features We Chose</b>
                         <tbody>
@@ -84,7 +85,7 @@
                             </tr>
                         </tbody>
                     </table>
-
+                    <br>
                     <p>
                         We chose 4 Before***Max features. The reason we choose ”Before” is
                         that our model is a predictive model, which need to finish
@@ -109,7 +110,9 @@
                         before_hard_dpf_max”,”before_cpu_util_max”,”before_disk_util_max”,
                         ”and before_net_work_util_max”.
                     </p>
+                    <br>
                     $$ Data_{New} = \log_{2}{Data_{Old}} $$
+                    <br>
                     <p>
                         To find potential features for the mouse wait time, we draw
                         scatter plots in Figure 2 to see if the log-transformed
@@ -135,6 +138,7 @@
                         ”before_cpu_util_max”,”before_disk_util_max” as our dynamic system
                         info input_features.
                     </p>
+                    <br>
                     <div>
                         <p>
                             <b>Figure 2. Scatter plot for CPU util, disk util, and
@@ -142,6 +146,7 @@
                         </p>
                         <img src="./img/scatterplot.png" />
                     </div>
+                    <br>
                     <p>
                         We then create a new column for the classification task, 0 - 5
                         sec, 5 - 10 sec, and 10+ sec based on mouse wait time. The
@@ -153,6 +158,7 @@
                         would cause a large bias on the first classification group, which
                         is a problem that we would solve later.
                     </p>
+                    <br>
                     <div class="img_container">
                         <div style="width: 60%">
                             <p><b>Figure 3. Waitsecs distribution</b></p>
@@ -163,6 +169,7 @@
                             <img class="fig_4" src="./img/wait_msecs_vs_dynamicSystemInfo.png" />
                         </div>
                     </div>
+                    <br>
                     <p>
                         To see how
                         ”before_hard_dpf_max”,”before_cpu_util_max”,”before_disk_util_max”,and
@@ -187,6 +194,7 @@
                     </p>
                     <br>
                     <br>
+                    <br>
                     <h3>Static System Info</h3>
                     <p>
                         The data set we use is ”system_sysinfo_unique_normalized.csv000”,
@@ -200,6 +208,7 @@
                         features,and ”ram”, ”age_category”, ”processornumber” are
                         quantitative features as they are ordinal.
                     </p>
+                    <br>
 
                     <table class="table table-bordered">
                         <b>Table 3. 9 Static System Info Features We Chose</b>
@@ -227,6 +236,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
                     <p>
                         Then, we use Chi-squared test to test if each of the nominal
                         features are correlated with the mouse wait time. The Null
@@ -257,6 +267,7 @@
                         other columns on these 30 dimensions. These 30 columns will be our
                         static system info input features.
                     </p>
+                    <br>
 
                     <table class="table table-bordered">
                         <b>Figure 5. Chi-squared test on each categorical feature</b>
@@ -299,6 +310,7 @@
                     <br>
                     <br>
                     <br>
+                    <br>
                     <h2>Classification Model</h2>
                     <br>
                     <br>
@@ -321,6 +333,7 @@
                         and 18,058 unique GUIDs. Below is the result of the model in both
                         the training and test set.
                     </p>
+                    <br>
 
                     <table class="table table-bordered">
                         <b>Figure 6. Accuracy of Baseline Model on Training Set</b>
@@ -353,6 +366,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
 
                     <table class="table table-bordered">
                         <b>Figure 7. Accuracy of Baseline Model on Test Set</b>
@@ -385,6 +399,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
 
                     <p>
                         From the result, first of all, the model is overfitted, as the
@@ -401,6 +416,7 @@
                     
                     <br>
                     <br>
+                    <br>
                     <h3>Improved Model</h3>
                     <p>
                         To further improve the model, we include features from static
@@ -410,6 +426,7 @@
                         from the dynamic features, we use Decision Tree Classifier to
                         perform the modeling again on the same training and test set.
                     </p>
+                    <br>
 
                     <table class="table table-bordered">
                         <b>Figure 8. Accuracy of Model Combined Static System Info</b>
@@ -442,6 +459,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
                     <p>
                         The performance of the new model is obviously better than baseline
                         model, but it still has the problem that F-1 score on group 5-10
@@ -459,6 +477,7 @@
                         after max leave node is after 4000. We can choose We can choose a
                         max leaf node like 4500 to achieve a high F-1 score.
                     </p>
+                    <br>
                     <div class="img_container">
                         <div style="width: 60%">
                             <p><b>Figure 9. F1-score VS different MaxDepth</b></p>
@@ -469,7 +488,9 @@
                             <img class="fig_4" src="./img/max_leaf_node.png" />
                         </div>  
                     </div>
-                    <br />
+                    <br>
+                    <br>
+                    <br>
                     <h3>Bagging</h3>
                     <p>
                         Even by adding more features or changing different max depth, the
@@ -484,10 +505,12 @@
                         parallel.Doing so will generate multiple models, and we will pick
                         the prediction that is the most frequent among the model outputs.
                     </p>
+                    <br>
                     <div>
                         <p><b>Figure 11. Bagging</b></p>
                         <img class="fig_5" src="./img/bagging.png" />
                     </div>
+                    <br>
                     <p>
                         In the figure 3, we see group 0-5 second is around 7times big as
                         group 5-10 second or group 10+ second.So we divide the 0-5 second
@@ -499,6 +522,7 @@
                         models will give us 7 predictions and we use majority rules to
                         decide the final prediction.
                     </p>
+                    <br>
 
                     <table class="table table-bordered">
                         <b>Figure 11. F1-score After Bagging</b>
@@ -531,6 +555,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
                     <p>
                         Bagging brings us a big improvement two on group5-10 second and
                         group 10+ second although the F-1score on the group 0-5 second
@@ -539,7 +564,10 @@
                         performance on all groups, we need to explore more related
                         features.
                     </p>
+                    <br>
                     <hr />
+                    <br>
+                    <br>
                     <h2>Conclusion and Future Work</h2>
                     <p>
                         In this paper, we have explored how machinelearning can be used
