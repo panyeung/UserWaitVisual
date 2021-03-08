@@ -9,7 +9,7 @@ p {
 
 .img_container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .container {
   margin: auto;
