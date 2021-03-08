@@ -1,55 +1,44 @@
 <html>
-  <head>
-    <title>Mouse Wait Prediction</title>
-    <!-- Bootstrap core CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <!-- Font Awesome icons (free version)-->
-    <script
-      src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"
-      crossorigin="anonymous"
-    ></script>
 
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="intro.css" />
-  </head>
+<head>
+  <title>Mouse Wait Prediction</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
 
-  <body
-    data-new-gr-c-s-check-loaded="14.997.0"
-    data-gr-ext-installed=""
-    class="clickup-chrome-ext_installed"
-  >
-    <header>
-      <div class="header-pusher"></div>
-      <!-- Navigation Bar -->
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="./index.html"
-                >Home<span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="./intro.html">Overview</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="./analysis.html">Analysis</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+  <!-- Custom styles for this template -->
+  <link href="starter-template.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="intro.css" />
+</head>
 
-    <div class="container">
-      <h1>Introduction</h1>
+<body data-new-gr-c-s-check-loaded="14.997.0" data-gr-ext-installed="" class="clickup-chrome-ext_installed">
+  <header>
+    <div class="header-pusher"></div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/intro.html">Overview</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/analysis.html">Analysis</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Introduction</h1>
+    <div>
       <div>
-        <div>
+        <p>
           Mouse wait is officially called Windows wait cursor,also known as busy
           cursor, which is a mouse icon status that indicates that mouse cursor
           is busy or processes are busy performing operations and set the cursor
@@ -63,7 +52,10 @@
           be a long-term wait.Currently, most studies online is about fix or
           prevent mouse wait event, but there is no research conducted on the
           mouse wait time prediction, which tells users the expected mouse wait
-          times.In our study, we will build a classification model to predict
+          times.
+        </p>
+        <br />
+        <p> In our study, we will build a classification model to predict
           mouse wait by separating the wait time into three groups: 0-5 sec,
           5-10 sec, and 10+ sec. The reason we classify the time in this way is
           that were gard 0-5 sec as short wait time, 5-10 sec as medium wait
@@ -71,116 +63,127 @@
           system information and static system information, which will be
           introduced in the following sections. So far, as for the model,
           Decision Tree Classifier has the highest accuracy with fair model
-          evaluation.
-          <br />
-        </div>
+          evaluation. </p>
       </div>
-      <hr />
-      <h1>Data</h1>
-      <h3>Data Collection</h3>
-      <p>
-        Intel® System Usage Report (SUR) collector XLSDK is a framework that
-        used to collect data for this project. In the data collection process,
-        we implement input libraries (IL) that collect comprehensive raw data
-        from computer and then implement Analyzer TaskLibraries (ATL) to clean
-        and process these raw data.At the beginning, Intel® Energy Checker
-        SDKEnergy Server (ESRV) executes IL files to collect samples every
-        second. After ESRV finishes collecting data, it writes raw data into
-        Database (DB) file. Next,when ATL file is executed, it reads the DB file
-        and processes raw data collected from the ILs, and outputs data into log
-        files corresponding to each GUID (GlobalUnique Identifier for each
-        computer). In the end, log files are uploaded to online server for
-        further analysis.User wait input library is a Dynamic Link Library(DLL)
-        file.During the collection process, ESRV executes this file’s function
-        every 0.1 second and also at any moment when user click any mouse
-        button.At each iteration, User wait IL uses Windows APIGetCursorInfo and
-        GetIconInfo to capture and analyze the mouse icon. GetCursorInfo returns
-        the position of cursor and a handler to cursor. By inputing this handler
-        to GetIconInfo, it will return the icon status of cursor.When it returns
-        a Windows wait cursor, ESRV records the current time and mouse wait
-        event. After ESRV finishes its collecting process, it outputs raw mouse
-        wait data to DB file with variable name and variable type defined in
-        User wait IL. Since samples are collecting at every 0.1 second. Any
-        event less than 0.1 second can’t be detected. However, these events are
-        transient and human can’t even perceive them, so missing these events
-        will be of no significance. After recording the mouse wait event, we
-        also need to know the dynamic system information when events are
-        happening. It will be the best if we can collect system usage of the
-        process that is responsible.However, it is hard to tract which
-        application causes the mouse wait event since OS can cause a mouse wait
-        at any time.Therefore, we decide to collect all processes’ system usage
-        when mouse wait event happens. Besides User wait IL, we have Process
-        IL.ESRV executes the Process IL to record comprehensive information of
-        each process. At each iteration, It calls the Windows API
-        ZwQuerySystemInformation and OpenProcess. ZwQuerySystemInformation will
-        list all processes and its PID (process ID) currently running on the
-        system and OpenProcess utilizes PID to collect each process’s system
-        usage like process name, running time, I/O usage, memory usage, disk
-        usage and page fault. Unlike User wait IL which records data only when
-        it encounters spinning wheel incident event, the ProcessIL records and
-        writes all data it captures every second.After the raw data is collected
-        and saved as raw DB file, analyzer tasks read the file and analyze them
-        by language C and SQL. Since all measurements by ILs are timestamped,
-        the start time (ts) of a mouse wait event is the timestamp of the first
-        row of that mouse wait event.The duration (waitmsec) of the mouse wait
-        event is the timestamp difference between the first row and last row of
-        that mouse wait event. By using the ts of mouse wait event, ATL can
-        locate the processes in plist data set that has the same ts, which are
-        running processes during mouse wait event, and compute CPU-util,
-        Disk-Util,Network-util and Hard Page Fault. These features will be saved
-        as mousewaitall log file. In the file, each row denotes a mouse wait
-        event and each column denotes system usage related to one mouse wait
-        event.
-      </p>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">number rows</th>
-            <th scope="col">number of Guid</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Whole (2020)</td>
-            <td>14,534,433</td>
-            <td>29,587</td>
-          </tr>
-          <tr>
-            <td>Train (2020.Oct)</td>
-            <td>1,729,282</td>
-            <td>16,778</td>
-          </tr>
-          <tr>
-            <td>Test (2020.Nov)</td>
-            <td>1,488,682</td>
-            <td>15,702</td>
-          </tr>
-        </tbody>
-        <b>Table 1. Data set</b>
-      </table>
-
-      <p>
-        At the beginning, we implement our own XLSDK and ATLASK and do the data
-        collection on local computers, but then we realize the scale of data
-        sets is too small and may cause the model has high bias. We need more
-        data from all kinds of users. Since we don’t have resource to access
-        such many users, Intel team collect and provide us with data sets. Data
-        sets includes 14,534,433 rows with 29,587 unique GUID within the 2020
-        interval. Since the complete dataset is fairly large, we choose all rows
-        within 2020 October interval as train set and choose all rows within
-        next month, 2020 November, as test set for our model. In the train
-        set,there are 1,729,282 rows and 16,778 distinct GUID. In the test set,
-        there are 1,488,682 rows and 15,702 distinctGuid. For the target feature
-        waitmsecs, we divide the wait time into 0-5s, 5-10s and 10+s as a
-        preparation for the classification model. After exploring the
-        correlation between potential features and the mouse wait time, we find
-        that dynamic features, including CPU utilization,disk utilization, hard
-        page faults, and static features,including the number of cores, RAM,
-        model type, etc,could influence the mouse wait time. These features are
-        then incorporated in the model.
-      </p>
     </div>
-  </body>
+    <hr />
+    <h1>Data</h1>
+    <h3>Data Collection</h3>
+    <p>
+      Intel® System Usage Report (SUR) collector XLSDK is a framework that
+      used to collect data for this project. In the data collection process,
+      we implement input libraries (IL) that collect comprehensive raw data
+      from computer and then implement Analyzer TaskLibraries (ATL) to clean
+      and process these raw data.
+    </p>
+    <p>
+      At the beginning, Intel® Energy Checker
+      SDKEnergy Server (ESRV) executes IL files to collect samples every
+      second. After ESRV finishes collecting data, it writes raw data into
+      Database (DB) file. Next,when ATL file is executed, it reads the DB file
+      and processes raw data collected from the ILs, and outputs data into log
+      files corresponding to each GUID (GlobalUnique Identifier for each
+      computer). In the end, log files are uploaded to online server for
+      further analysis.
+    </P>
+    <br />
+    <p>
+      User wait input library is a Dynamic Link Library(DLL)
+      file.During the collection process, ESRV executes this file’s function
+      every 0.1 second and also at any moment when user click any mouse
+      button.At each iteration, User wait IL uses Windows APIGetCursorInfo and
+      GetIconInfo to capture and analyze the mouse icon. GetCursorInfo returns
+      the position of cursor and a handler to cursor. By inputing this handler
+      to GetIconInfo, it will return the icon status of cursor.When it returns
+      a Windows wait cursor, ESRV records the current time and mouse wait
+      event. After ESRV finishes its collecting process, it outputs raw mouse
+      wait data to DB file with variable name and variable type defined in
+      User wait IL. Since samples are collecting at every 0.1 second. Any
+      event less than 0.1 second can’t be detected. However, these events are
+      transient and human can’t even perceive them, so missing these events
+      will be of no significance. </p>
+    <p>
+      After recording the mouse wait event, we
+      also need to know the dynamic system information when events are
+      happening. It will be the best if we can collect system usage of the
+      process that is responsible.However, it is hard to tract which
+      application causes the mouse wait event since OS can cause a mouse wait
+      at any time.Therefore, we decide to collect all processes’ system usage
+      when mouse wait event happens. Besides User wait IL, we have Process
+      IL.ESRV executes the Process IL to record comprehensive information of
+      each process. At each iteration, It calls the Windows API
+      ZwQuerySystemInformation and OpenProcess. ZwQuerySystemInformation will
+      list all processes and its PID (process ID) currently running on the
+      system and OpenProcess utilizes PID to collect each process’s system
+      usage like process name, running time, I/O usage, memory usage, disk
+      usage and page fault. Unlike User wait IL which records data only when
+      it encounters spinning wheel incident event, the ProcessIL records and
+      writes all data it captures every second. </p>
+
+    <p>After the raw data is collected
+      and saved as raw DB file, analyzer tasks read the file and analyze them
+      by language C and SQL. Since all measurements by ILs are timestamped,
+      the start time (ts) of a mouse wait event is the timestamp of the first
+      row of that mouse wait event.The duration (waitmsec) of the mouse wait
+      event is the timestamp difference between the first row and last row of
+      that mouse wait event. By using the ts of mouse wait event, ATL can
+      locate the processes in plist data set that has the same ts, which are
+      running processes during mouse wait event, and compute CPU-util,
+      Disk-Util,Network-util and Hard Page Fault. These features will be saved
+      as mousewaitall log file. In the file, each row denotes a mouse wait
+      event and each column denotes system usage related to one mouse wait
+      event.
+    </p>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">number rows</th>
+          <th scope="col">number of Guid</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Whole (2020)</td>
+          <td>14,534,433</td>
+          <td>29,587</td>
+        </tr>
+        <tr>
+          <td>Train (2020.Oct)</td>
+          <td>1,729,282</td>
+          <td>16,778</td>
+        </tr>
+        <tr>
+          <td>Test (2020.Nov)</td>
+          <td>1,488,682</td>
+          <td>15,702</td>
+        </tr>
+      </tbody>
+      <b>Table 1. Data set</b>
+    </table>
+
+    <p>
+      At the beginning, we implement our own XLSDK and ATLASK and do the data
+      collection on local computers, but then we realize the scale of data
+      sets is too small and may cause the model has high bias. We need more
+      data from all kinds of users. Since we don’t have resource to access
+      such many users, Intel team collect and provide us with data sets. Data
+      sets includes 14,534,433 rows with 29,587 unique GUID within the 2020
+      interval. Since the complete dataset is fairly large, we choose all rows
+      within 2020 October interval as train set and choose all rows within
+      next month, 2020 November, as test set for our model. In the train
+      set,there are 1,729,282 rows and 16,778 distinct GUID. In the test set,
+      there are 1,488,682 rows and 15,702 distinctGuid. For the target feature
+      waitmsecs, we divide the wait time into 0-5s, 5-10s and 10+s as a
+      preparation for the classification model. After exploring the
+      correlation between potential features and the mouse wait time, we find
+      that dynamic features, including CPU utilization,disk utilization, hard
+      page faults, and static features,including the number of cores, RAM,
+      model type, etc,could influence the mouse wait time. These features are
+      then incorporated in the model.
+    </p>
+  </div>
+</body>
+
 </html>

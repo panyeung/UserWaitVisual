@@ -1,3 +1,12 @@
+h2,
+h3 {
+  margin: 1rem 0rem 1rem 0rem;
+}
+p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .container {
   margin: auto;
   line-height: 2;
