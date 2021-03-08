@@ -1,0 +1,16 @@
+img {
+  display: inline-block;
+}
+.container {
+  margin: auto;
+  line-height: 2;
+}
+
+.img_container {
+  display: flex;
+  justify-content: space-between;
+}
+.fig_4 {
+  width: 400px;
+  height: auto;
+}

@@ -1,76 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
     <title>Mouse wait classification</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <script
+      src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="starter-template.css" rel="stylesheet" />
   </head>
 
   <body>
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Menu</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Introduction <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/index.html"
+              >Home<span class="sr-only">(current)</span></a
+            >
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="EDA/EDA.html">EDA</a>
+            <a class="nav-link" href="/intro.html">Overview</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="/Model/model.html">Model</a>
-          <li class="nav-item">
-            <a class="nav-link active" href="Result/Result.html">Result</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            <a class="nav-link" href="/analysis.html">Analysis</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </div>
     </nav>
 
     <main role="main" class="container">
+      <!-- <div class="starter-template">
+      <h1>Bootstrap starter template</h1>
+      <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
+        mostly barebones HTML document.</p>
+    </div> -->
 
-      <div class="starter-template">
-        <h1>Mouse Wait classification</h1>
-        <p class="lead">This is a study of machine learning and
-        its application to mouse wait time in computers. Specifically, a classification of mouse wait
-         time estimates based on dynamic and static system information within the 2020 time interval.
-         Dynamic system information is subject to GUID, as each system has its own set of configuration,
-         while static system information would mitigate the effect of such bias, as it provides information
-         for each GUID. The model reaches an accuracy of 70% with Decision Tree Classifier.
-         <br> </p>
+      <div id="content-area" style="text-align: center">
+        <h1>Mouse Wait Classification</h1>
+        <br />
+        <hr />
+        <div>
+          <div>
+            <h2>Abstract</h2>
+            <p>
+              This thesis describes an study of machine learning and its
+              application to mouse wait time in computers.Specifically, we are
+              building a classification model of mouse wait time based on
+              dynamic and static system information within the 2020 time
+              interval to classify if a mouse wait event would last within 0-5
+              secs, 5-10secs, or 10+ secs. Dynamic system information, such as
+              CPU utilization, is subject to the configuration of each system.
+              Therefore, by incorporating static system information which
+              includes the computer configuration of each system into the model,
+              we could significantly improve the accuracy of the prediction.
+              Currently, the model reaches an accuracy of 70% with Decision
+              TreeClassifier.
+            </p>
+            <br />
+          </div>
+        </div>
+        <br />
+        <hr />
+        <footer>
+          <div
+            style="
+              position: absolute;
+              bottom: 0;
+              width: 100%;
+              text-align: right;
+            "
+          >
+            © UCSD Data Science
+          </div>
+        </footer>
       </div>
-
-    </main><!-- /.container -->
+    </main>
+    <!-- /.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>'
+        );
+    </script>
+    <script src="../../../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../../../dist/js/bootstrap.min.js"></script>
   </body>
 </html>
