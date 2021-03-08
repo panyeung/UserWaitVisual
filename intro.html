@@ -54,7 +54,9 @@
               </div>
               <div>
                 <p><b>Figure 2. Mac wait cursor</b></p>
-                <img class="fig_4" src="./img/max.gif" />
+                <br>
+                <br>
+                <img class="fig_4" src="./img/mac.jpg" style="width: 20%"/>
               </div>
             </div>
 
@@ -85,7 +87,10 @@
     </div>
     <hr />
     <h1>Data</h1>
-    <h3>Data Collection</h3>
+    <div>
+      <img class="fig_4" src="./img/datacollection.png" />
+    </div>
+
     <p>
       Intel® System Usage Report (SUR) collector XLSDK is a framework that
       used to collect data for this project. In the data collection process,
@@ -94,10 +99,10 @@
       and process these raw data.
     </p>
 
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-      aria-expanded="false" aria-controls="collapseExample">
+    <center><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+      aria-expanded="false" aria-controls="collapseExample" align="center">
       Learn More
-    </button>
+    </button></center>
     <div class="collapse" id="collapseExample">
       <div class="card card-body">
         <p>
@@ -158,7 +163,30 @@
           event.
         </p>
 
-        <table class="table">
+        <p>
+          At the beginning, we implement our own XLSDK and ATLASK and do the data
+          collection on local computers, but then we realize the scale of data
+          sets is too small and may cause the model has high bias. We need more
+          data from all kinds of users. Since we don’t have resource to access
+          such many users, Intel team collect and provide us with data sets. Data
+          sets includes 14,534,433 rows with 29,587 unique GUID within the 2020
+          interval. Since the complete dataset is fairly large, we choose all rows
+          within 2020 October interval as train set and choose all rows within
+          next month, 2020 November, as test set for our model. In the train
+          set,there are 1,729,282 rows and 16,778 distinct GUID. In the test set,
+          there are 1,488,682 rows and 15,702 distinctGuid. For the target feature
+          waitmsecs, we divide the wait time into 0-5s, 5-10s and 10+s as a
+          preparation for the classification model. After exploring the
+          correlation between potential features and the mouse wait time, we find
+          that dynamic features, including CPU utilization,disk utilization, hard
+          page faults, and static features,including the number of cores, RAM,
+          model type, etc,could influence the mouse wait time. These features are
+          then incorporated in the model.
+        </p>
+      </div>
+    </div>
+  <br>
+  <table class="table">
           <thead>
             <tr>
               <th scope="col"></th>
@@ -184,31 +212,7 @@
             </tr>
           </tbody>
           <b>Table 1. Data set</b>
-        </table>
-
-        <p>
-          At the beginning, we implement our own XLSDK and ATLASK and do the data
-          collection on local computers, but then we realize the scale of data
-          sets is too small and may cause the model has high bias. We need more
-          data from all kinds of users. Since we don’t have resource to access
-          such many users, Intel team collect and provide us with data sets. Data
-          sets includes 14,534,433 rows with 29,587 unique GUID within the 2020
-          interval. Since the complete dataset is fairly large, we choose all rows
-          within 2020 October interval as train set and choose all rows within
-          next month, 2020 November, as test set for our model. In the train
-          set,there are 1,729,282 rows and 16,778 distinct GUID. In the test set,
-          there are 1,488,682 rows and 15,702 distinctGuid. For the target feature
-          waitmsecs, we divide the wait time into 0-5s, 5-10s and 10+s as a
-          preparation for the classification model. After exploring the
-          correlation between potential features and the mouse wait time, we find
-          that dynamic features, including CPU utilization,disk utilization, hard
-          page faults, and static features,including the number of cores, RAM,
-          model type, etc,could influence the mouse wait time. These features are
-          then incorporated in the model.
-        </p>
-      </div>
-    </div>
-
+    </table>
 
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
